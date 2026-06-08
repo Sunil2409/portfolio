@@ -10,12 +10,11 @@ hamburger.addEventListener('click', () => {
 });
 
 // Close mobile menu when a link is clicked
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
-});
+navMenu.addEventListener('click', (e) => {
+    if (e.target.classList.contains('nav-link')) {
+        closeMobileMenu();
+    }
+})
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
@@ -24,6 +23,11 @@ document.addEventListener('click', (e) => {
         navMenu.classList.remove('active');
     }
 });
+
+function closeMobileMenu() {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+}
 
 // Form Submission
 const contactForm = document.getElementById('contactForm');
@@ -184,18 +188,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Add some project card interactivity
-const projectCards = document.querySelectorAll('.project-card');
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
 // Scroll to top button functionality
 function createScrollTopButton() {
     const button = document.createElement('button');
@@ -255,6 +247,30 @@ function createScrollTopButton() {
 // Initialize scroll to top button
 createScrollTopButton();
 
+// Modal Logic
+const modal = document.getElementById('projectModal');
+const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+const closeBtn = document.querySelector('.close-btn');
+
+learnMoreBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // In a real scenario, you would load different content based on `btn.dataset.project`
+        modal.style.display = 'block';
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target == modal) {
+        modal.style.display = 'none';
+    }
+});
+
+
 // Allow GitHub links to work (remove the prevention)
 // Project links are now properly configured with actual GitHub URLs
 
@@ -267,7 +283,6 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('keydown', (e) => {
     // ESC to close mobile menu
     if (e.key === 'Escape') {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        closeMobileMenu();
     }
 });

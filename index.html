@@ -33,8 +33,8 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Sunil Kumar</span></h1>
-                <p class="hero-subtitle">Full Stack Developer | Creative Problem Solver | Tech Enthusiast</p>
+                <h1 class="hero-title">I'm <span class="highlight">Sunil Kumar</span></h1>
+                <p class="hero-subtitle">I engineer scalable backend systems with Python and Django, focusing on clean architecture and API design. I bring applications to life by containerizing them with Docker and building automated CI/CD pipelines for reliable deployments.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">View My Work</a>
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
@@ -141,7 +141,8 @@
                             <span>API Development</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/money-management-system" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/money-management-system" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="project-link learn-more-btn" data-project="money-manager"><i class="fas fa-book-open"></i> Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -160,7 +161,7 @@
                             <span>Automation</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/ai_email_assistant" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/ai_email_assistant" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -178,7 +179,7 @@
                             <span>Note-Taking</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/Smart_journal" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/Smart_journal" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -196,7 +197,7 @@
                             <span>Data Storage</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/TODO" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/TODO" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -214,7 +215,7 @@
                             <span>Web Application</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/Django_Calculator" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/Django_Calculator" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -233,7 +234,7 @@
                             <span>Learning</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Sunil2409/Python_learnings" class="project-link" target="_blank"><i class="fas fa-github"></i> GitHub</a>
+                            <a href="https://github.com/Sunil2409/Python_learnings" class="project-link" target="_blank"><i class="fab fa-github"></i> GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -308,6 +309,59 @@
             <p>Designed and built with <i class="fas fa-heart"></i> by Sunil Kumar</p>
         </div>
     </footer>
+
+    <!-- Modal for Project Details -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalBody">
+                <!-- Content will be injected by JavaScript -->
+                <h2>Money Manager: Case Study</h2>
+                
+                <h3>Architecture Diagram</h3>
+                <p>[Placeholder for your architecture diagram image. Show how the client, API, and database interact within Docker.]</p>
+                <img src="architecture.svg" alt="Money Manager Architecture Diagram" style="width:100%; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; padding: 1rem;">
+
+                <h3>Deployment Flow</h3>
+                <p>[Placeholder for your deployment flowchart. Show the CI/CD pipeline from git push to deployment.]</p>
+                <img src="deployment.svg" alt="Money Manager Deployment Flowchart" style="width:100%; border-radius: 8px; margin-bottom: 1.5rem; border: 1px solid #e2e8f0; padding: 1rem;">
+
+                <h3>Code Snippet: Dockerfile</h3>
+                <p>This Dockerfile containerizes the Django application, ensuring a consistent and reproducible environment.</p>
+                <pre style="background: #2d2d2d; color: #f1f1f1; padding: 1rem; border-radius: 8px; white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; font-size: 0.9em;"><code># Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set environment variables for best practices
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set work directory
+WORKDIR /app
+
+# Copy only requirements to leverage Docker cache
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create a non-root user for security
+RUN addgroup --system app &amp;&amp; adduser --system --ingroup app app
+
+# Copy the rest of the application
+COPY . .
+
+# Change ownership of the app directory
+RUN chown -R app:app /app
+
+# Switch to the non-root user
+USER app
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Run gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "money_manager.wsgi"]</code></pre>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

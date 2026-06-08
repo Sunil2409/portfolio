@@ -568,6 +568,51 @@ body {
     margin: 0 0.3rem;
 }
 
+/* ============ Modal ============ */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 3rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 12px;
+    position: relative;
+    animation: slideDown 0.4s ease;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
 /* ============ Responsive Design ============ */
 @media (max-width: 768px) {
     .nav-menu {
@@ -642,6 +687,11 @@ body {
 
     .contact-form {
         padding: 1.5rem;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 2rem;
     }
 }
 
